@@ -40,18 +40,27 @@ namespace SnakeGame
         public static SystemSound Beep { get; }
         static void Main(string[] args)
         {
+            //set size
+            Console.Write("Set size - ex. 40x20 (Max. 160x63):");
+            string[] SizeTokens = Console.ReadLine().Split('x');
+            List<int> winSize = new List<int>();
 
+            Console.SetWindowSize(int.Parse(SizeTokens[0]), int.Parse(SizeTokens[1]));
+            //***
+            //set speed
             Console.Write("Enter snake speed (x25 ms) or leave blank for (4):");
             int speed;
             string SpeedInput = Console.ReadLine();
-            if (SpeedInput != null)
+            if (SpeedInput == "")
             {
                 speed = 100;
             }
             else
             {
-                speed = int.Parse(SpeedInput);
+                speed = int.Parse(SpeedInput)*25;
             }
+            //***
+            //set sound
             string sinp = "";
             while (sinp != "y" && sinp != "n") {
                 Console.Clear();
@@ -66,6 +75,7 @@ namespace SnakeGame
                     IsSoundOn = false;
                 }
             }
+            //**
             Position[] directions = new Position[]
             {
                 new Position(0,1), //right
@@ -92,6 +102,7 @@ namespace SnakeGame
                 }
             while (true)
             {
+                Console.SetWindowSize(int.Parse(SizeTokens[0]), int.Parse(SizeTokens[1]));
                 // Key Controller:
                 if (Console.KeyAvailable)
                 {
